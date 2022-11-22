@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet, FlatList, Image} from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import {View, Text, StyleSheet, FlatList, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+// import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import { TextInput } from 'react-native-gesture-handler';
+// import { TextInput } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
 import { useState, useEffect } from 'react';
 
@@ -72,7 +72,7 @@ export default function Products() {
                 <TextInput style={styles.input} placeholder='Search' placeholderTextColor="#FFF" value={produtoFiltrado} onChange={(e) => setProdutoFiltrado(e.target.value)} name="" id=""/>
                     <Feather name='search' size={18} color='white' />   
             </View>
-            <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: '50%'}}>
+            <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
             <Feather name='log-out' size={28} color='#FFF'/>
             </View>
         </View>

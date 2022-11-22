@@ -9,7 +9,7 @@ import {
 
 import * as Animatable from "react-native-animatable";
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 export default function SignIn() {
   const navigation = useNavigation();
@@ -17,22 +17,33 @@ export default function SignIn() {
   return (
     <View style={styles.container}>
       <Animatable.View
-        animation="fadeInLeft"
+        animation='fadeInLeft'
         delay={500}
-        style={styles.containerHeader}
-      >
+        style={styles.containerHeader}>
         <Text style={styles.message}>Bem vindo</Text>
       </Animatable.View>
-      <Animatable.View animation="fadeInUp" style={styles.containerForm}>
+      <Animatable.View
+        animation='fadeInUp'
+        style={styles.containerForm}>
         <Text style={styles.title}>Email</Text>
-        <TextInput placeholder="Digite um email" style={styles.input} />
+        <TextInput
+          placeholder='Digite um email'
+          style={styles.input}
+        />
         <Text style={styles.title}>Senha</Text>
-        <TextInput placeholder="Sua senha" style={styles.input} />
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('/')}>
+        <TextInput
+          placeholder='Sua senha'
+          style={styles.input}
+        />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("/")}>
           <Text style={styles.buttonText}>Acessar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('/Cadastro')}>
-          <Text style={styles.registerText} >
+        <TouchableOpacity
+          style={styles.buttonRegister}
+          onPress={() => navigation.navigate("/Cadastro")}>
+          <Text style={styles.registerText}>
             Não possui uma conta? Cadastre-se
           </Text>
         </TouchableOpacity>
@@ -74,25 +85,25 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     fontSize: 16,
   },
-  button:{
-    backgroundColor: '#003580',
-    width: '100%',
+  button: {
+    backgroundColor: "#003580",
+    width: "100%",
     borderRadius: 4,
     paddingVertical: 8,
     marginTop: 14,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
-  buttonText:{
+  buttonText: {
     color: "#FFF",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   buttonRegister: {
     marginTop: 14,
-    alignSelf: 'center'
+    alignSelf: "center",
   },
-  registerText:{
+  registerText: {
     color: "#a1a1a1",
-  }
+  },
 });

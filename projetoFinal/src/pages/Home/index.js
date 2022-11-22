@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, ScrollView, TextInput } from 'react-native';
+// import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native';
 

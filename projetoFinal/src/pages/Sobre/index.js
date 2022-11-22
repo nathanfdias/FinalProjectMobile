@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet} from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
+// import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import { TextInput } from 'react-native-gesture-handler';
+// import { TextInput } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons'
 
 export default function Sobre() {
@@ -11,10 +11,10 @@ export default function Sobre() {
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
           <View style={styles.header}>
-               <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: '50%'}}>
+               <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
                        <Feather name='github' size={28} color='white' />   
                </View>
-               <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: '50%'}}>
+               <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
                <Feather name='log-out' size={28} color='#FFF'/>
                </View>
            </View>

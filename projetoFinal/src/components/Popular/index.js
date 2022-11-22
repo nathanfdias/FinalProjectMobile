@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import DiscoverPage from '../../components/DiscoverPage';

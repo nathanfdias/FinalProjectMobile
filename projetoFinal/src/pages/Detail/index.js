@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, ImageBackground, StyleSheet, Image } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, Image, ScrollView, TouchableOpacity  } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+// import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
 import { useNavigation } from '@react-navigation/native';
 

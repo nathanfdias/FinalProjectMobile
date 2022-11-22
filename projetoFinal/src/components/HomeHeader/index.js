@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet , TextInput} from 'react-native';
+// import { TextInput } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons'
 
 export default function HomeHeader() {
  return (
     <View style={styles.header}>
-    <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: '50%'}}>
+    <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
             <Feather name='shopping-cart' size={28} color='white' />   
     </View>
-    <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: '50%'}}>
+    <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
     <Feather name='log-out' size={28} color='#FFF'/>
     </View>
 </View>
