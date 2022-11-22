@@ -1,12 +1,32 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
-// import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+
+import React, { useState, useEffect, useContext } from 'react';
+import {
+    View,
+    Text,
+    StyleSheet,
+    FlatList,
+    StatusBar, Button, ScrollView, TouchableOpacity, SafeAreaView
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-// import { TextInput } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons'
+import DiscoverPage from '../../components/DiscoverPage';
+import apiGit from '../../services/apiGit';
+import CardGit from '../../components/CardGit';
+import { getUsers } from '../../services/apiGitClient';
+
 
 export default function Sobre() {
-    const navigation = useNavigation();
+    const [tasks, setTasks] = useState([])
+
+    const fetchData = async () => {
+        const taskList = await getUsers();
+        setTasks(taskList)
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
 
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -42,6 +62,9 @@ export default function Sobre() {
                    </View>
                </View>
            </View>
+            <SafeAreaView style={styles.container}>
+            <FlatList  data={tasks} keyExtractor={item => item.id}  renderItem={({item}) => <CardGit item={item}/> }/>
+            </SafeAreaView>
       </ScrollView>
      );
 }
@@ -84,4 +107,16 @@ const styles = StyleSheet.create({
         paddingBottom: 16,
         color: '#FFF',
     },
+    mainDiscover:{
+        height: 340,
+        backgroundColor: '#003580',
+        borderTopWidth: 1, borderTopColor: '#0003',
+        flexDirection: 'row',
+        padding: 20,
+        paddingLeft: 30,
+    },
+    container: {
+        flex: 1,
+        marginTop: StatusBar.currentHeight || 0,
+      },
 })

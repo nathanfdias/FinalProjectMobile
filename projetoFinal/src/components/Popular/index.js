@@ -37,9 +37,9 @@ export default function Popular() {
             </View>
         </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.mainDiscover}>
-            <DiscoverPage cover={require('../../assets/teste.jpg')} produto='Produto' categoria='categoria' onPress={() => navigation.navigate('Detail')}/>
-            <DiscoverPage cover={require('../../assets/teste.jpg')} produto='Produto' categoria='categoria' onPress={() => navigation.navigate('Detail')}/>
-            <DiscoverPage cover={require('../../assets/teste.jpg')} produto='Produto' categoria='categoria' onPress={() => navigation.navigate('Detail')}/>
+            <DiscoverPage cover={require('../../assets/teste.jpg')} produto='Produto' categoria='categoria' onPress={() => navigation.navigate('/Detail')}/>
+            <DiscoverPage cover={require('../../assets/teste.jpg')} produto='Produto' categoria='categoria' onPress={() => navigation.navigate('/Detail')}/>
+            <DiscoverPage cover={require('../../assets/teste.jpg')} produto='Produto' categoria='categoria' onPress={() => navigation.navigate('/Detail')}/>
         </ScrollView>
         <View style={styles.footer}>
             <Text style={{paddingHorizontal: 30, color: '#FFF', fontSize: 18, paddingBottom: 26}}>Comprando conosco:</Text>

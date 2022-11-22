@@ -15,7 +15,6 @@ export default function Products() {
     const { produtos, carregando} = ProdutoAPI();
 
     useEffect(() => {
-        console.log(produtos)
         setUrl(urlLink(navigation.pathname));
     }, [navigation]);
     
@@ -45,7 +44,6 @@ export default function Products() {
     }
 
     const ProdutoFiltrar = () => {
-        console.log("Produto filtrar...")
         const produtosFiltrados = produtos?.filter((produto) =>
             produto.nome.toUpperCase().includes(produtoFiltrado)
         );
