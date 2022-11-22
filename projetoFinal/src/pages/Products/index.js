@@ -1,20 +1,30 @@
-import React from 'react';
-import {View, Text, StyleSheet, FlatList, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  TextInput,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 // import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 // import { TextInput } from 'react-native-gesture-handler';
-import { Feather } from '@expo/vector-icons';
-import { useState, useEffect } from 'react';
+import { Feather } from "@expo/vector-icons";
+import { useState, useEffect } from "react";
 
-import { ProdutoAPI } from '../../services/api';
+import { ProdutoAPI } from "../../services/api";
 
 export default function Products() {
-    const navigation = useNavigation();
-    const [produtoFiltrado, setProdutoFiltrado] = useState("");
-    const [url, setUrl] = useState("");
-    const { produtos, carregando} = ProdutoAPI();
+  const navigation = useNavigation();
+  const [produtoFiltrado, setProdutoFiltrado] = useState("");
+  const [url, setUrl] = useState("");
+  const { produtos, carregando } = ProdutoAPI();
 
     useEffect(() => {
+        console.log(produtos)
         setUrl(urlLink(navigation.pathname));
     }, [navigation]);
     
@@ -114,45 +124,69 @@ export default function Products() {
 }
 
 const styles = StyleSheet.create({
-    header:{
-        backgroundColor: '#003580',
-        height: 120,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        paddingHorizontal: 30,
-    },
-    input:{
-        fontSize: 13,
-        width: '40%',
-        height: 38,
-        color: '#FFF',
-    },
-    inputArea:{
-        paddingHorizontal: 15,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent:'space-between',
-        width: '60%',
-        paddingHorizontal: 20,
-        height: 48,
-        borderRadius: 16,
-        backgroundColor: '#0003',
-        color: '#FFF'
-    },
-    main:{
-        height: 130,
-        backgroundColor: '#003580',
-        paddingHorizontal: 30,
-        width: '100%',
-    },
-    textPage:{
-        fontSize: 18,
-        paddingBottom: 16,
-        color: '#FFF',
-    },
-    produtosContainer:{
-        width: '100%',
-        flexGrow: 1,
-    }
-})
+  header: {
+    backgroundColor: "#003580",
+    height: 120,
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    paddingHorizontal: 30,
+  },
+  input: {
+    fontSize: 13,
+    width: "40%",
+    height: 38,
+    color: "#FFFFFF",
+  },
+  inputArea: {
+    paddingHorizontal: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "60%",
+    paddingHorizontal: 20,
+    height: 48,
+    borderRadius: 16,
+    backgroundColor: "#0003",
+    color: "#FFFFFF",
+  },
+  main: {
+    height: 130,
+    backgroundColor: "#003580",
+    paddingHorizontal: 30,
+    width: "100%",
+  },
+  textPage: {
+    fontSize: 18,
+    paddingBottom: 16,
+    color: "#FFFFFF",
+  },
+  produtosContainer: {
+    width: "100%",
+    flexGrow: 1,
+    paddingBottom: 80,
+  },
+  produtos: {
+    alignItems: "center",
+    padding: 30,
+  },
+  descricao: {
+    backgroundColor: "#003580",
+    width: "75%",
+    borderBottomRightRadius: 45,
+  },
+  titulo: {
+    color: "#F0F8FF",
+    fontSize: 26,
+    lineHeight: 42,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  subTitulo: {
+    color: "#B0E0E6",
+    fontSize: 16,
+    lineHeight: 26,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+});
