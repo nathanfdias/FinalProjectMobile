@@ -1,88 +1,71 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
-import * as Animatable from "react-native-animatable";
+import * as Animatable from 'react-native-animatable'; 
 
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from '@react-navigation/native';
 
 export default function Welcome() {
   const navigation = useNavigation();
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.logo}>
-        <Animatable.Image
-          animation='flipInX'
-          delay={100}
-          source={require("../../assets/logo.png")}
-          style={styles.logoImg}
-        />
+ return (
+   <View style={styles.container}>
+      <View style={styles.containerLogo}>
+        <Animatable.Image animation='flipInY' source={require('../../assets/logo.png')} style={{width: '60%'}} resizeMode="contain"/>
       </View>
-      <Animatable.View
-        delay={700}
-        animation='fadeInUp'
-        style={styles.footer}>
-        <Text style={styles.title}>
-          Os melhores veículos você encontra na AsphaltCoding
-        </Text>
-        <Text style={styles.txt}>Faça o login para começar</Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Login")}>
+      <Animatable.View delay={700} animation='fadeInUp' style={styles.containerForm}>
+        <Text style={styles.title}>TechShop os melhores preços, somente aqui!</Text>
+        <Text style={styles.text}>Faça o login para começar</Text>
+
+        <TouchableOpacity style={styles.button} onPress={ () => navigation.navigate('/SignIn')}>
           <Text style={styles.buttonText}>Acessar</Text>
         </TouchableOpacity>
       </Animatable.View>
-    </View>
+   </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container:{
     flex: 1,
-    backgroundColor: "#7B0000",
+    backgroundColor: '#003580'
   },
-  logo: {
+  containerLogo:{
     flex: 2,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  logoImg: {
-    width: 100,
-    height: 100,
-  },
-  footer: {
+  containerForm:{
     flex: 1,
-    backgroundColor: "#FFF",
+    backgroundColor: '#FFF',
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
-    paddingStart: "5%",
-    paddingEnd: "5%",
+    paddingStart: '5%',
+    paddingEnd: '5%',
   },
-  title: {
+  title:{
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginTop: 28,
-    marginBottom: 18,
+    marginBottom: 12,
   },
-  txt: {
-    color: "#696969",
-    fontSize: 16,
-
+  text:{
+    color: '#a1a1a1',
   },
-  button: {
-    position: "absolute",
-    backgroundColor: "#7B0000",
+  button:{
+    position: 'absolute',
+    backgroundColor: '#003580',
     borderRadius: 50,
-    paddingVertical: "5%",
-    width: "60%",
-    alignSelf: "center",
-    bottom: "15%",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingVertical: 8,
+    width: '60%',
+    alignSelf: 'center',
+    bottom: '15%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  buttonText: {
-    color: "#FFF",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-});
+  buttonText:{
+    fontSize: 18,
+    color: '#FFF',
+    fontWeight: 'bold',
+  }
+})

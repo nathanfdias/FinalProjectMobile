@@ -1,0 +1,11 @@
+-expo install @react-navigation/native
+-expo install @react-navigation/stack
+-expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context  @react-native-community/masked-view
+-expo install react-native-ionicons@^4.x
+-expo install react-native-swiper
+-expo install react-native-stars
+-npm install react-native-animatable --save
+
+- expo install @react-navigation/native-stack
+
+-npm install axios

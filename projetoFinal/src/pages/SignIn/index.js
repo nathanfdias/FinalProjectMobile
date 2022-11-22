@@ -1,11 +1,17 @@
-import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-import * as Animatable from 'react-native-animatable';
+import * as Animatable from "react-native-animatable";
 
 import { useNavigation } from '@react-navigation/native';
 
-export default function Login() {
+export default function SignIn() {
   const navigation = useNavigation();
 
   return (
@@ -22,10 +28,10 @@ export default function Login() {
         <TextInput placeholder="Digite um email" style={styles.input} />
         <Text style={styles.title}>Senha</Text>
         <TextInput placeholder="Sua senha" style={styles.input} />
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('/')}>
           <Text style={styles.buttonText}>Acessar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonRegister}>
+        <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('/Cadastro')}>
           <Text style={styles.registerText} >
             Não possui uma conta? Cadastre-se
           </Text>
@@ -38,7 +44,7 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#7B0000",
+    backgroundColor: "#003580",
   },
   containerHeader: {
     marginTop: "14%",
@@ -69,7 +75,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button:{
-    backgroundColor: '#7B0000',
+    backgroundColor: '#003580',
     width: '100%',
     borderRadius: 4,
     paddingVertical: 8,
