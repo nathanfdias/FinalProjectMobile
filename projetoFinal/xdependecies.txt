@@ -9,3 +9,5 @@
 - expo install @react-navigation/native-stack
 
 -npm install axios
+
+...
