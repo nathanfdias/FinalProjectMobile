@@ -1,16 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet , TextInput} from 'react-native';
-// import { TextInput } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native';
 
 export default function HomeHeader() {
+    const navigation = useNavigation();
+    
  return (
     <View style={styles.header}>
     <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
             <Feather name='shopping-cart' size={28} color='white' />   
     </View>
     <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
-    <Feather name='log-out' size={28} color='#FFF'/>
+    <Feather name='log-out' size={28} color='#FFF' onPress={() => navigation.navigate('/SignIn')}/>
     </View>
 </View>
   );

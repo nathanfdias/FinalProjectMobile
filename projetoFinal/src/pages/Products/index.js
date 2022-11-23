@@ -6,7 +6,6 @@ import {
   FlatList,
   Image,
   TextInput,
-  ScrollView,
   TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -116,11 +115,7 @@ export default function Products() {
             name=''
             id=''
           />
-          <Feather
-            name='search'
-            size={18}
-            color='#FFFFFF'
-          />
+          <Feather name='search' size={18} color='#FFFFFF'/>
         </View>
         <View
           style={{
@@ -131,11 +126,7 @@ export default function Products() {
             justifyContent: "center",
             borderRadius: 50,
           }}>
-          <Feather
-            name='log-out'
-            size={28}
-            color='#FFF'
-          />
+          <Feather name='log-out' size={28} color='#FFF' onPress={() => navigation.navigate('/SignIn')}/>
         </View>
       </View>
       <View style={styles.main}>

@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     Text,
     StyleSheet,
     FlatList,
-    StatusBar, Button, ScrollView, TouchableOpacity, SafeAreaView, Linking
+    StatusBar, TouchableOpacity, SafeAreaView, Linking
 } from 'react-native';
 import { Feather } from '@expo/vector-icons'
 import CardGit from '../../components/CardGit';
 import { getUsers } from '../../services/apiGitClient';
-
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -35,7 +34,7 @@ export default function Sobre() {
                        <Feather name='github' size={28} color='white'   onPress={() => Linking.openURL('https://github.com/nathanfdias/FinalProjectMobile')}/>   
                </View>
                <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
-               <Feather name='log-out' size={28} color='#FFF'/>
+               <Feather name='log-out' size={28} color='#FFF' onPress={() => navigation.navigate('/SignIn')}/>
                </View>
            </View>
            <View style={styles.main}>
