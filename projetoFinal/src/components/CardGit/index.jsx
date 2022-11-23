@@ -13,10 +13,10 @@ const CardGit = ({ item }) => {
             </View>
             <View style={styles.detalhes}>
                 <Text style={styles.textPage}>{item.location}</Text>
+                <Text style={styles.textPage}>Seguidores: {item.followers}</Text>
                 <Text style={styles.textPage}>{item.company}</Text>
                 <Text style={styles.textPage}>{item.blog}</Text>
                 <Text style={styles.textPage}>{item.bio}</Text>
-                <Text style={styles.textPage}>Seguidores: {item.followers}</Text>
             </View>
         </View>
         </TouchableOpacity>
@@ -34,11 +34,8 @@ card: {
     alignItems: 'center',
     paddingTop: 20,
     paddingBottom: 20,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(00, 53, 128, 0.05)',
     width: '80%',
-    shadowColor: '#171717',
-    shadowOpacity: 0.6,
-    shadowRadius: 6,
 },
 detalhes: {
     alignItems: 'center',
@@ -47,9 +44,6 @@ detalhes: {
     backgroundColor: '#003580',
     width: '80%',
     borderBottomRightRadius: 90,
-    shadowColor: '#171717',
-    shadowOpacity: 0.6,
-    shadowRadius: 6,
 },
 foto: {
     width: 200,
@@ -64,6 +58,9 @@ textPageTitulo: {
 textPage:{
     fontSize: 18,
     color: '#fff',
+    paddingLeft: 10,
+    paddingRight: 10,
+    textAlign: 'center',
 },
 })
 
