@@ -29,7 +29,7 @@ export default function Sobre() {
 
     return (
     <>
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <View style={styles.container}>
           <View style={styles.header}>
                <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
                        <Feather name='github' size={28} color='white'   onPress={() => Linking.openURL('https://github.com/nathanfdias/FinalProjectMobile')}/>   
@@ -65,7 +65,7 @@ export default function Sobre() {
             <SafeAreaView>
             <FlatList  data={tasks} keyExtractor={item => item.id}  renderItem={({item}) => <CardGit item={item}/> }/>
             </SafeAreaView>
-      </ScrollView>
+      </View>
     </>
      );
 }
@@ -119,5 +119,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: StatusBar.currentHeight || 0,
+        marginBottom: 250
       },
 })
