@@ -23,103 +23,140 @@ export default function Products() {
   const [url, setUrl] = useState("");
   const { produtos, carregando } = ProdutoAPI();
 
-    useEffect(() => {
-        console.log(produtos)
-        setUrl(urlLink(navigation.pathname));
-    }, [navigation]);
-    
-    const urlLink = (url) => {
-        if (!url == "/Products") {
-            return `/`;
-        }
-        return `/Products`;
-    };
+  useEffect(() => {
+    console.log(produtos);
+    setUrl(urlLink(navigation.pathname));
+  }, [navigation]);
 
-    const render = ({item}) => {
-        return(
-            <View>
-                <Image style={{width: 120, height: 120}} source={{uri:item.fotoLink}}/>
-                <View >
-                    <Text>{item.nome}</Text>
-                    <Text>{`R$ ${item.valor.toFixed(2)}`}</Text>
-                    {/* <NavLink
+  const urlLink = (url) => {
+    if (!url == "/Products") {
+      return `/`;
+    }
+    return `/Products`;
+  };
+  
+console.log(produtos)
+  const render = ({ item }) => {
+    return (
+      <View style={styles.produtos}>
+        <Image
+          style={{ width: 250, height: 250 }}
+          source={{ uri: item.fotoLink }}
+        />
+        <View style={styles.descricao}>
+          <Text style={styles.titulo}>{item.nome}</Text>
+          <Text style={styles.subTitulo}>{`R$ ${item.valor.toFixed(2)}`}</Text>
+          {/* <NavLink
                         to={`${url}/${item.id}`}
                         className="buttons"
                     >
                         <button>Detalhes</button>
                     </NavLink> */}
-                </View>
-            </View>
-        );    
-    }
-
-    const ProdutoFiltrar = () => {
-        const produtosFiltrados = produtos?.filter((produto) =>
-            produto.nome.toUpperCase().includes(produtoFiltrado)
-        );
-        return (
-            <FlatList data={produtos} keyExtractor={(item) => item.id} renderItem={render} showsVerticalScrollIndicator={false}/>
-        );
-    };
-
-    const Carregando = () => {
-        return (
-            <>
-                <View>
-                    <Text>CARREGANDO PRODUTOS</Text>
-                </View>
-            </>
-        );
-    }
-
-
- return (
-   <View >
-       <View style={styles.header}>
-            <View style={styles.inputArea}>
-                <TextInput style={styles.input} placeholder='Search' placeholderTextColor="#FFF" value={produtoFiltrado} onChange={(e) => setProdutoFiltrado(e.target.value)} name="" id=""/>
-                    <Feather name='search' size={18} color='white' />   
-            </View>
-            <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
-            <Feather name='log-out' size={28} color='#FFF'/>
-            </View>
+                    
         </View>
-        <View style={styles.main}>
-            <Text style={{fontSize: 50, color: '#FFF'}}>Mostruário</Text>
-            <View style={{width:'66%', height:70, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end'}}>
-                <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('/')}>
-                        <Text style={[styles.textPage]}>
-                            Popular
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{borderBottomWidth: 1, borderBottomColor: '#FFF'}}>
-                    <TouchableOpacity onPress={() => navigation.navigate('/Products')}>
-                            <Text style={styles.textPage}>
-                                Produtos
-                            </Text>
-                    </TouchableOpacity>
-                </View>
-                <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('/Sobre')}>
-                        <Text style={styles.textPage}>
-                            Sobre
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+      </View>
+    );
+  };
+
+  const ProdutoFiltrar = () => {
+  
+    const produtosFiltrados = produtos?.filter((produto) =>
+      produto.nome.toUpperCase().includes(produtoFiltrado.toUpperCase())
+    );
+
+    return (
+      <FlatList
+        data={produtosFiltrados}
+        keyExtractor={(item) => item.id}
+        renderItem={render}
+        showsVerticalScrollIndicator={false}
+        initialNumToRender={3}
+      />
+    );
+  };
+
+  const Carregando = () => {
+    return (
+      <>
+        <View>
+          <Text>CARREGANDO PRODUTOS</Text>
         </View>
-        <View style={styles.produtosContainer}>
-            {(() => {
-                if (carregando) {
-                    return <Carregando />;
-                } else {
-                    return <ProdutoFiltrar />;
-                }
-            })()}
+      </>
+    );
+  };
+
+  return (
+    <View>
+      <View style={styles.header}>
+        <View style={styles.inputArea}>
+          <TextInput
+            style={styles.input}
+            placeholder='Search'
+            placeholderTextColor='#FFFFFF'
+            value={produtoFiltrado}
+            onChangeText={setProdutoFiltrado}
+            name=''
+            id=''
+          />
+          <Feather
+            name='search'
+            size={18}
+            color='#FFFFFF'
+          />
         </View>
-   </View>
+        <View
+          style={{
+            width: 54,
+            height: 54,
+            backgroundColor: "#0003",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 50,
+          }}>
+          <Feather
+            name='log-out'
+            size={28}
+            color='#FFFFFF'
+          />
+        </View>
+      </View>
+      <View style={styles.main}>
+        <Text style={{ fontSize: 50, color: "#FFFFFF" }}>Mostruário</Text>
+        <View
+          style={{
+            width: "66%",
+            height: 70,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+          }}>
+          <View>
+            <TouchableOpacity onPress={() => navigation.navigate("/")}>
+              <Text style={[styles.textPage]}>Popular</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ borderBottomWidth: 1, borderBottomColor: "#FFFFFF" }}>
+            <TouchableOpacity onPress={() => navigation.navigate("/Products")}>
+              <Text style={styles.textPage}>Produtos</Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TouchableOpacity onPress={() => navigation.navigate("/Sobre")}>
+              <Text style={styles.textPage}>Sobre</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+      <View style={styles.produtosContainer}>
+        {(() => {
+          if (carregando) {
+            return <Carregando />;
+          } else {
+            return <ProdutoFiltrar />;
+          }
+        })()}
+      </View>
+    </View>
   );
 }
 
