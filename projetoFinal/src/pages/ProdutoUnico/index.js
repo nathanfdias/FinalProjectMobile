@@ -2,7 +2,7 @@ import React from 'react';
 import { useRoute } from '@react-navigation/native';
 import { ProdutoAPI } from "../../services/api";
 import { useState, useEffect, useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, ImageBackground} from 'react-native';
 import { Feather } from '@expo/vector-icons'
 
 import { useNavigation } from "@react-navigation/native";
@@ -14,88 +14,134 @@ export default function ProdutoUnico() {
     const { produtos, carregando } = ProdutoAPI(`/${ctx.info}`);
     const navigation = useNavigation();
 
-    console.log(produtos);
+    return (
+      <ScrollView style={styles.container}>
+           <View style={styles.header}>
+               <ImageBackground source={require('../../assets/backgroundproduto.png')} style={styles.image} resizeMode='cover'>
+                   <View style={styles.child} >
+                       <View style={styles.iconsTop}>
+                           <TouchableOpacity onPress={() => navigation.navigate('/Products')}>
+                               <Feather name='arrow-left' size={24} color='white' />
+                           </TouchableOpacity>
+                           <View style={{backgroundColor:'#FFF', borderRadius:50, padding: 6}}>
+                               <Feather name='heart' size={18} color='black' />
+                           </View>
+                       </View>
+                       <Text style={{fontSize:24, color:'#FFF', alignSelf: 'flex-start', paddingHorizontal:26}}>Produto: {produtos.nome}</Text>
+                   </View>
+               </ImageBackground>
+           </View>
+           <View style={styles.main}>
+               <View style={{borderBottomWidth: 3, borderBottomColor: '#FFF9', width: 64, alignSelf: 'center', marginTop: 24}}></View>
+               <View style={styles.boxes}>
+                   <View style={styles.box}>
+                       <Feather name='tag' size={30} color='white' style={{paddingHorizontal:20}}/>
+                       <View style={{justifyContent:'flex-start', width:110}}>
+                           <Text style={{fontSize: 18, color: '#FFF'}}>R${produtos.valor}</Text>
+                           <Text style={{fontSize: 12, color: '#FFF5'}}>Preço</Text>
+                       </View>
+                   </View>
+                   <View style={styles.box}>
+                       <Feather name='file' size={30} color='white' style={{paddingHorizontal:20}}/>
+                       <View style={{justifyContent:'flex-start', width:110}}>
+                           <Text style={{fontSize: 18, color: '#FFF'}}>{produtos.nomeCategoria?.toLowerCase()}</Text>
+                           <Text style={{fontSize: 12, color: '#FFF5'}}>Categoria</Text>
+                       </View>
+                   </View>
+               </View>
+               <View style={styles.text}>
+                   <Text style={{fontSize:18, color:'#FFF'}}>Descrição:</Text>
+                   <Text style={{fontSize:12, color:'#FFF4', marginTop:14}}>{produtos.descricao}</Text>
+               </View>
+               <View style={styles.text}>
+                   <Text style={{fontSize:18, color:'#FFF'}}>Galerey</Text>
+                   <View style={[styles.images, {marginTop: 16}]}>
+                       <View>
+                           <Image source={{uri: produtos?.fotoLink}} style={{width:156, height:130, marginVertical:6 ,borderRadius: 12, marginLeft: 10}}/>
+                       </View>
+                       <View style={{height: 130, alignItems: 'center', justifyContent: 'center'}}>
+                        <TouchableOpacity style={styles.button}>
+                                <Text style={{color:'#003580'}}>Adicionar ao Carrinho</Text>
+                        </TouchableOpacity>
+                       </View>
+                   </View>
+               </View>
+           </View>
+      </ScrollView>
+     );
+   }
+   
+   const styles = StyleSheet.create({
+       container:{
+           flex: 1,
+           width: '100%',
+           backgroundColor: '#FFF',
+       },
+       header:{},
+       image: {
+           height: 280,
+           width: '100%',
+       },
+       child: {
+           height: 280,
+           backgroundColor: 'rgba(0,0,0,0.4)',
+       },
+       iconsTop:{
+           height: '70%',
+           flexDirection: 'row',
+           alignItems: 'center',
+           justifyContent: 'space-between',
+           paddingHorizontal: 26,
+       },
+       main:{
+           marginTop: -40,
+           borderTopEndRadius: 35,
+           borderTopStartRadius: 35,
+           backgroundColor: '#003580',
+           height: 600,
+       },
+       boxes:{
+           flexDirection: 'row',
+           width: '100%',
+           justifyContent: 'center',
+       },
+       box:{
+           marginTop: 30,
+           marginHorizontal: 6,
+           width: 160,
+           height: 70,
+           backgroundColor: '#0003',
+           borderRadius: 12,
+           flexDirection: 'row',
+           alignItems: 'center',
+           justifyContent: 'space-between',
+       },
+       text:{
+           marginTop: 34,
+           paddingHorizontal: 42,
+       },
+       images:{
+           flexDirection: 'row',
+       },
+       imageGalerey:{
+           width: 160,
+           height: 110,
+           marginVertical: 6,
+           borderRadius: 14,
+       },
+       button:{
+           width: 160,
+           height: 26,
+           alignItems:'center',
+           justifyContent: 'center',
+           backgroundColor: '#FFF',
+           borderRadius: 4,
+           marginLeft: 18,
+       }
+   })
 
- return (
-    <View>
-        <View style={styles.header}>
-            <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
-                    <Feather name='arrow-left' size={28} color='white' />   
-            </View>
-            <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
-            <Feather name='log-out' size={28} color='#FFF'/>
-            </View>
-        </View>
-        <View style={styles.main}>
-            <Text style={{fontSize: 50, color: '#FFF'}}>Produto</Text>
-            <View style={{height:70}} />
-        </View>
-        <View style={styles.produtoContainer}>
-            <Image
-            style={{ width: 150, height: 150 }}
-            source={{ uri: produtos.fotoLink }}
-            />
-            <View style={{flexDirection:'column'}}>
-                <Text style={styles.textDescript}>{produtos.nome}</Text>
-                <Text style={styles.textDescript}>{produtos.descricao}</Text>
-                <Text style={styles.textDescript}>{`Valor: R$ ${produtos.valor}`}</Text>
-            </View>
-        </View>
-        <View style={{width: '100%', marginTop: 30, alignItems:'center'}}>
-            <TouchableOpacity style={styles.button}>
-                <Text style={{color:'#fff', fontSize: 16}}>Adicionar ao Carrinho</Text>
-            </TouchableOpacity>
-        </View>
-    </View>
- );
-}
-
-const styles = StyleSheet.create({
-    header:{
-        backgroundColor: '#003580',
-        height: 120,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        paddingHorizontal: 30,
-    },
-    main:{
-        height: 130,
-        backgroundColor: '#003580',
-        paddingHorizontal: 30,
-        width: '100%',
-    },
-    textPage:{
-        fontSize: 18,
-        paddingBottom: 16,
-        color: '#FFF',
-    },
-    mainDiscover:{
-        height: 340,
-        backgroundColor: '#003580',
-        borderTopWidth: 1, borderTopColor: '#0003',
-        flexDirection: 'row',
-        padding: 20,
-        paddingLeft: 30,
-    },
-    container: {
-        flex: 1,
-    },
-    produtoContainer:{
-        marginTop: 60,
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    textDescript:{
-        marginVertical: 6,
-        marginLeft: 30,
-        maxWidth: 200,
-    },
-    button:{
-        width: 180,
-        height: 26,
-        alignItems:'center',
-        justifyContent: 'center',
-        backgroundColor: '#003580',
-    }
-})
+{/* <View style={{flexDirection:'column'}}>
+<Text style={styles.textDescript}>{produtos.nome}</Text>
+<Text style={styles.textDescript}>{produtos.descricao}</Text>
+<Text style={styles.textDescript}>{`Valor: R$ ${produtos.valor}`}</Text>
+</View> */}
