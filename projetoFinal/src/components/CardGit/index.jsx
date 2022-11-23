@@ -36,6 +36,9 @@ card: {
     paddingBottom: 20,
     backgroundColor: '#fff',
     width: '80%',
+    shadowColor: '#171717',
+    shadowOpacity: 0.6,
+    shadowRadius: 6,
 },
 detalhes: {
     alignItems: 'center',
