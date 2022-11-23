@@ -6,13 +6,16 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
+import { useState, useEffect } from "react";
 import * as Animatable from "react-native-animatable";
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 export default function SignIn() {
   const navigation = useNavigation();
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [errorLogin, setErrorLogin] = useState("");
 
   return (
     <View style={styles.container}>
@@ -28,23 +31,55 @@ export default function SignIn() {
         <Text style={styles.title}>Email</Text>
         <TextInput
           placeholder='Digite um email'
+          type='text'
           style={styles.input}
+          onChangeText={(text) => setEmail(text)}
+          value={email}
         />
         <Text style={styles.title}>Senha</Text>
         <TextInput
           placeholder='Sua senha'
+          secureTextEntry={true}
           style={styles.input}
+          onChangeText={(text) => setSenha(text)}
+          value={senha}
         />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("/")}>
-          <Text style={styles.buttonText}>Acessar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.buttonRegister}
-          onPress={() => navigation.navigate("/Cadastro")}>
+        {errorLogin === true ? (
+          <View style={styles.contentAlert}>
+            <MaterialCommunityIcons
+              name='alert-circle'
+              size={24}
+              color='#bdbdbd'
+            />
+            <Text style={styles.warningAlert}> Email ou Senha Inválidos!</Text>
+          </View>
+        ) : (
+          <View />
+        )}
+        {/* DECOMENTAR ABAIXO PARA IMPEDIR DE ENTRAR SEM DIGITAR SENHA */}
+        {/* {email === "" || senha === "" ? (
+          <TouchableOpacity
+            disabled={true}
+            style={styles.button}
+            onPress={() => navigation.navigate("/")}>
+            <Text style={styles.buttonText}>Acessar</Text>
+          </TouchableOpacity>
+        ) : ( */}
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("/")}>
+            <Text style={styles.buttonText}>Acessar</Text>
+          </TouchableOpacity>
+        {/* )} */}
+
+        <TouchableOpacity style={styles.buttonRegister}>
           <Text style={styles.registerText}>
-            Não possui uma conta? Cadastre-se
+            Não possui uma conta?{" "}
+            <Text
+              style={styles.linkSubscribe}
+              onPress={() => navigation.navigate("/Cadastro")}>
+              Cadastre-se
+            </Text>
           </Text>
         </TouchableOpacity>
       </Animatable.View>
@@ -105,5 +140,18 @@ const styles = StyleSheet.create({
   },
   registerText: {
     color: "#a1a1a1",
+  },
+  contentAlert: {
+    marginTop: 20,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  warningAlert: {
+    paddingLeft: 10,
+    color: "#4d5156",
+  },
+  linkSubscribe: {
+    color: "#1877f2",
   },
 });
