@@ -9,19 +9,26 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-// import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native";
-// import { TextInput } from 'react-native-gesture-handler';
 import { Feather } from "@expo/vector-icons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import { ProdutoAPI } from "../../services/api";
+
+import { DataContext } from '../../Context/DataContext';
 
 export default function Products() {
   const navigation = useNavigation();
   const [produtoFiltrado, setProdutoFiltrado] = useState("");
   const [url, setUrl] = useState("");
   const { produtos, carregando } = ProdutoAPI();
+  const ctx = useContext(DataContext);
+  const [idPont, setIdPont] = useState(0);
+
+  function infoId(item) {
+    navigation.navigate(`${url}/${item.id}`)
+    ctx.setInfo(item.id);
+  }
 
   useEffect(() => {
     console.log(produtos);
@@ -32,27 +39,22 @@ export default function Products() {
     if (!url == "/Products") {
       return `/`;
     }
-    return `/Products`;
+    return "/Products";
   };
   
-console.log(produtos)
   const render = ({ item }) => {
     return (
       <View style={styles.produtos}>
         <Image
-          style={{ width: 250, height: 250 }}
+          style={{ width: 150, height: 150 }}
           source={{ uri: item.fotoLink }}
         />
         <View style={styles.descricao}>
-          <Text style={styles.titulo}>{item.nome}</Text>
+          <Text style={styles.titulo}>{item.nome.substring(0,13)}</Text>
           <Text style={styles.subTitulo}>{`R$ ${item.valor.toFixed(2)}`}</Text>
-          {/* <NavLink
-                        to={`${url}/${item.id}`}
-                        className="buttons"
-                    >
-                        <button>Detalhes</button>
-                    </NavLink> */}
-                    
+          <TouchableOpacity style={styles.buttons} onPress={() => infoId(item)}>
+            <Text style={{color: '#003580'}}>Detalhes</Text>
+          </TouchableOpacity>        
         </View>
       </View>
     );
@@ -65,12 +67,11 @@ console.log(produtos)
     );
 
     return (
-      <FlatList
+      <FlatList numColumns={2} style={{width: '100%'}}
         data={produtosFiltrados}
         keyExtractor={(item) => item.id}
         renderItem={render}
         showsVerticalScrollIndicator={false}
-        initialNumToRender={3}
       />
     );
   };
@@ -116,12 +117,12 @@ console.log(produtos)
           <Feather
             name='log-out'
             size={28}
-            color='#FFFFFF'
+            color='#FFF'
           />
         </View>
       </View>
       <View style={styles.main}>
-        <Text style={{ fontSize: 50, color: "#FFFFFF" }}>Mostruário</Text>
+        <Text style={{ fontSize: 50, color: "#FFF" }}>Mostruário</Text>
         <View
           style={{
             width: "66%",
@@ -196,34 +197,39 @@ const styles = StyleSheet.create({
   textPage: {
     fontSize: 18,
     paddingBottom: 16,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
   },
   produtosContainer: {
-    width: "100%",
-    flexGrow: 1,
-    paddingBottom: 80,
   },
   produtos: {
-    alignItems: "center",
+    alignItems: 'center',
     padding: 30,
   },
   descricao: {
-    backgroundColor: "#003580",
-    width: "75%",
+    backgroundColor: '#003580',
+    width: 150,
     borderBottomRightRadius: 45,
   },
   titulo: {
     color: "#F0F8FF",
-    fontSize: 26,
+    fontSize: 18,
     lineHeight: 42,
     fontWeight: "bold",
     textAlign: "center",
   },
   subTitulo: {
     color: "#B0E0E6",
-    fontSize: 16,
+    fontSize: 14,
     lineHeight: 26,
     textAlign: "center",
     fontWeight: "bold",
   },
+  buttons:{
+    marginVertical: 8,
+    paddingVertical: 3,
+    paddingHorizontal: 6,
+    alignSelf: 'center',
+    backgroundColor: '#FFF',
+    borderBottomRightRadius: 10,
+  }
 });

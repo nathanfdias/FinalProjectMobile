@@ -5,8 +5,15 @@ import { useNavigation } from '@react-navigation/native';
 import DiscoverPage from '../../components/DiscoverPage';
 import Stuffs from '../../components/Stuffs';
 
+import { useState, useContext } from "react";
+
+import { ProdutoAPI } from "../../services/api";
+
 export default function Popular() {
     const navigation = useNavigation();
+    const { produtos} = ProdutoAPI();
+    // const [produtoMap, setProdutoMap] = useState([]);
+
 
  return (
    <View>
@@ -37,9 +44,9 @@ export default function Popular() {
             </View>
         </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.mainDiscover}>
-            <DiscoverPage cover={require('../../assets/teste.jpg')} produto='Produto' categoria='categoria' onPress={() => navigation.navigate('/Detail')}/>
-            <DiscoverPage cover={require('../../assets/teste.jpg')} produto='Produto' categoria='categoria' onPress={() => navigation.navigate('/Detail')}/>
-            <DiscoverPage cover={require('../../assets/teste.jpg')} produto='Produto' categoria='categoria' onPress={() => navigation.navigate('/Detail')}/>
+            <DiscoverPage cover={{uri: produtos[1]?.fotoLink}} produto={produtos[1]?.nome} categoria={produtos[1]?.nomeCategoria} onPress={() => navigation.navigate('/Detail')}/>
+            <DiscoverPage cover={{uri: produtos[2]?.fotoLink}} produto={produtos[2]?.nome} categoria={produtos[2]?.nomeCategoria} onPress={() => navigation.navigate('/Detail')}/>
+            <DiscoverPage cover={{uri: produtos[6]?.fotoLink}} produto={produtos[6]?.nome} categoria={produtos[6]?.nomeCategoria} onPress={() => navigation.navigate('/Detail')}/>
         </ScrollView>
         <View style={styles.footer}>
             <Text style={{paddingHorizontal: 30, color: '#FFF', fontSize: 18, paddingBottom: 26}}>Comprando conosco:</Text>

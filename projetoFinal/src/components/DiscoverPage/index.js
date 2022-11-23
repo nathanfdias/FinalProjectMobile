@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-// import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 
@@ -13,7 +12,7 @@ export default function DiscoverPage(props) {
 
  return (
         <TouchableOpacity style={styles.content} onPress={props.onPress}>
-            <Image source={props.cover} style={styles.cover}/>
+            <Image source={props.cover} style={styles.cover} />
             <View style={{flexDirection: 'row', paddingTop:14, width:200, justifyContent:'space-between'}}>
                 <Text style={styles.textPlace}>{props.produto}</Text>
                 <View style={{backgroundColor:'orange', borderRadius:50, padding: 6}}>

@@ -3,16 +3,18 @@ import {
     View,
     Text,
     StyleSheet,
-    FlatList,
-    StatusBar, Button, ScrollView, TouchableOpacity, SafeAreaView, Linking
+    FlatList, Button, ScrollView, TouchableOpacity, SafeAreaView, Linking
 } from 'react-native';
 import { Feather } from '@expo/vector-icons'
 import CardGit from '../../components/CardGit';
 import { getUsers } from '../../services/apiGitClient';
 
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function Sobre() {
-    const [tasks, setTasks] = useState([])
+    const [tasks, setTasks] = useState([]);
+    const navigation = useNavigation();
 
     const fetchData = async () => {
         const taskList = await getUsers();
@@ -25,7 +27,7 @@ export default function Sobre() {
 
 
     return (
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <View style={styles.container} showsVerticalScrollIndicator={false}>
           <View style={styles.header}>
                <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
                        <Feather name='github' size={28} color='white'   onPress={() => Linking.openURL('https://github.com/nathanfdias/FinalProjectMobile')}/>   
@@ -58,10 +60,10 @@ export default function Sobre() {
                    </View>
                </View>
            </View>
-            <SafeAreaView>
-            <FlatList  data={tasks} keyExtractor={item => item.id}  renderItem={({item}) => <CardGit item={item}/> }/>
-            </SafeAreaView>
-      </ScrollView>
+           <View style={{}}>
+                <FlatList  style={{width: '100%'}} numColumns={2} data={tasks} keyExtractor={item => item.id}  renderItem={({item}) => <CardGit item={item}/> }/>
+           </View>
+      </View>
      );
 }
 
@@ -73,24 +75,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection: 'row',
         paddingHorizontal: 30,
-    },
-    input:{
-        fontSize: 13,
-        width: '40%',
-        height: 38,
-        color: '#FFF',
-    },
-    inputArea:{
-        paddingHorizontal: 15,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent:'space-between',
-        width: '60%',
-        paddingHorizontal: 20,
-        height: 48,
-        borderRadius: 16,
-        backgroundColor: '#0003',
-        color: '#FFF'
     },
     main:{
         height: 130,
@@ -113,6 +97,5 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        marginTop: StatusBar.currentHeight || 0,
-      },
+    },
 })
