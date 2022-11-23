@@ -1,16 +1,12 @@
-
 import React, { useState, useEffect, useContext } from 'react';
 import {
     View,
     Text,
     StyleSheet,
     FlatList,
-    StatusBar, Button, ScrollView, TouchableOpacity, SafeAreaView
+    StatusBar, Button, ScrollView, TouchableOpacity, SafeAreaView, Linking
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons'
-import DiscoverPage from '../../components/DiscoverPage';
-import apiGit from '../../services/apiGit';
 import CardGit from '../../components/CardGit';
 import { getUsers } from '../../services/apiGitClient';
 
@@ -32,7 +28,7 @@ export default function Sobre() {
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
           <View style={styles.header}>
                <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
-                       <Feather name='github' size={28} color='white' />   
+                       <Feather name='github' size={28} color='white'   onPress={() => Linking.openURL('https://github.com/nathanfdias/FinalProjectMobile')}/>   
                </View>
                <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
                <Feather name='log-out' size={28} color='#FFF'/>

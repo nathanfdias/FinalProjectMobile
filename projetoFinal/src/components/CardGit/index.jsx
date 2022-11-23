@@ -5,9 +5,12 @@ import { Text, TouchableOpacity, View, StyleSheet, Image, Linking } from "react-
 const CardGit = ({ item }) => {
     const navigation = useNavigation();
     return (
+        <TouchableOpacity   onPress={() => Linking.openURL(item.html_url)}>
         <View style={styles.container}>
-            <View style={styles.card} onPress={() => Linking.openURL(item.html_url)}>
+            <View style={styles.card}>
                 <Image source={{uri: item.avatar_url}} style={styles.foto}/>
+            </View>
+            <View style={styles.detalhes}>
                 <Text style={styles.textPage}>{item.name}</Text>
                 <Text style={styles.textPage}>{item.location}</Text>
                 <Text style={styles.textPage}>{item.blog}</Text>
@@ -16,6 +19,7 @@ const CardGit = ({ item }) => {
                 <Text style={styles.textPage}>Seguidores: {item.followers}</Text>
             </View>
         </View>
+        </TouchableOpacity>
             
     )
 }
@@ -24,15 +28,22 @@ const styles = StyleSheet.create({
 container: {
     alignItems: 'center', 
     marginTop: 50,
+    marginBottom: 50
 },
 card: {
     alignItems: 'center',
-    paddingTop: 50,
-    paddingBottom: 90,
+    paddingTop: 20,
+    paddingBottom: 20,
+    backgroundColor: '#fff',
+    width: '80%',
+},
+detalhes: {
+    alignItems: 'center',
+    paddingTop: 30,
+    paddingBottom: 20,
     backgroundColor: '#003580',
-    width: '90%',
-    height: '90%',
-    borderRadius: 40
+    width: '80%',
+    borderBottomRightRadius: 90,
 },
 foto: {
     width: 200,
