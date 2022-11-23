@@ -9,12 +9,12 @@ const CardGit = ({ item }) => {
         <View style={styles.container}>
             <View style={styles.card}>
                 <Image source={{uri: item.avatar_url}} style={styles.foto}/>
+                <Text style={styles.textPageTitulo}>{item.name}</Text>
             </View>
             <View style={styles.detalhes}>
-                <Text style={styles.textPage}>{item.name}</Text>
                 <Text style={styles.textPage}>{item.location}</Text>
-                <Text style={styles.textPage}>{item.blog}</Text>
                 <Text style={styles.textPage}>{item.company}</Text>
+                <Text style={styles.textPage}>{item.blog}</Text>
                 <Text style={styles.textPage}>{item.bio}</Text>
                 <Text style={styles.textPage}>Seguidores: {item.followers}</Text>
             </View>
@@ -56,6 +56,10 @@ foto: {
     height:200,
     borderRadius:'50%',
     marginBottom: 20
+},
+textPageTitulo: {
+    fontSize: 18,
+    color: '#000',
 },
 textPage:{
     fontSize: 18,
