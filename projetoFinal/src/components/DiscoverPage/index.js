@@ -15,7 +15,7 @@ export default function DiscoverPage(props) {
             <Image source={props.cover} style={styles.cover} />
             <View style={{flexDirection: 'row', paddingTop:14, width:200, justifyContent:'space-between'}}>
                 <Text style={styles.textPlace}>{props.produto}</Text>
-                <View style={{backgroundColor:'orange', borderRadius:50, padding: 6}}>
+                <View style={{backgroundColor:'white', borderRadius:50, padding: 6}}>
                     <Feather name='heart' size={14} color='black' />
                 </View>
             </View>

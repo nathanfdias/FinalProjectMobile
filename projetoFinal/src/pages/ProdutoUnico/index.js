@@ -54,12 +54,12 @@ export default function ProdutoUnico() {
                    <Text style={{fontSize:12, color:'#FFF4', marginTop:14}}>{produtos.descricao}</Text>
                </View>
                <View style={styles.text}>
-                   <Text style={{fontSize:18, color:'#FFF'}}>Galerey</Text>
+                   <Text style={{fontSize:18, color:'#FFF'}}>Galeria</Text>
                    <View style={[styles.images, {marginTop: 16}]}>
                        <View>
-                           <Image source={{uri: produtos?.fotoLink}} style={{width:156, height:130, marginVertical:6 ,borderRadius: 12, marginLeft: 10}}/>
+                           <Image source={{uri: produtos?.fotoLink}} style={{width:156, height:230, marginVertical:6 ,borderRadius: 12, marginLeft: 10}}/>
                        </View>
-                       <View style={{height: 130, alignItems: 'center', justifyContent: 'center'}}>
+                       <View style={{height: 230, alignItems: 'center', justifyContent: 'center'}}>
                         <TouchableOpacity style={styles.button}>
                                 <Text style={{color:'#003580'}}>Adicionar ao Carrinho</Text>
                         </TouchableOpacity>

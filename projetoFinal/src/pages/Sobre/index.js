@@ -10,9 +10,12 @@ import { Feather } from '@expo/vector-icons'
 import CardGit from '../../components/CardGit';
 import { getUsers } from '../../services/apiGitClient';
 
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function Sobre() {
-    const [tasks, setTasks] = useState([])
+    const [tasks, setTasks] = useState([]);
+    const navigation = useNavigation();
 
     const fetchData = async () => {
         const taskList = await getUsers();
