@@ -64,13 +64,13 @@ export default function SignIn() {
             onPress={() => navigation.navigate("/")}>
             <Text style={styles.buttonText}>Acessar</Text>
           </TouchableOpacity>
-        ) : (
+        ) : ( */}
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate("/")}>
             <Text style={styles.buttonText}>Acessar</Text>
           </TouchableOpacity>
-        )} */}
+        {/* )} */}
 
         <TouchableOpacity style={styles.buttonRegister}>
           <Text style={styles.registerText}>
