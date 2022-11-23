@@ -47,6 +47,9 @@ detalhes: {
     backgroundColor: '#003580',
     width: '80%',
     borderBottomRightRadius: 90,
+    shadowColor: '#171717',
+    shadowOpacity: 0.6,
+    shadowRadius: 6,
 },
 foto: {
     width: 200,
