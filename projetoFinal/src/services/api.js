@@ -26,3 +26,13 @@ export function ProdutoAPI(url) {
 
   return { produtos, carregando, error };
 }
+
+
+export const deleteProduto = async (id) => {
+  try {
+      const deleteProduto = await api.delete("/" + id)
+      return deleteProduto
+  } catch (e) {
+      console.log(e)
+  }
+}

@@ -14,7 +14,7 @@ import { Feather } from "@expo/vector-icons";
 import { useState, useEffect, useContext } from "react";
 import LottieView from "lottie-react-native";
 import { ProdutoAPI } from "../../services/api";
-
+import { deleteProduto } from "../../services/api";
 import { DataContext } from "../../Context/DataContext";
 
 export default function Products() {
@@ -30,8 +30,11 @@ export default function Products() {
     ctx.setInfo(item.id);
   }
 
+  function deleteId(item) {
+    deleteProduto(`${item.id}`);
+  }
+
   useEffect(() => {
-    console.log(produtos);
     setUrl(urlLink(navigation.pathname));
   }, [navigation]);
 
@@ -56,6 +59,11 @@ export default function Products() {
             style={styles.buttons}
             onPress={() => infoId(item)}>
             <Text style={{ color: "#003580" }}>Detalhes</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttons}
+            onPress={() => deleteId(item)}>
+            <Text style={{ color: "#003580" }}>Excluir</Text>
           </TouchableOpacity>
         </View>
       </View>
