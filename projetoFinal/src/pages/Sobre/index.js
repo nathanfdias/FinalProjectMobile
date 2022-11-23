@@ -58,7 +58,7 @@ export default function Sobre() {
                    </View>
                </View>
            </View>
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView>
             <FlatList  data={tasks} keyExtractor={item => item.id}  renderItem={({item}) => <CardGit item={item}/> }/>
             </SafeAreaView>
       </ScrollView>
