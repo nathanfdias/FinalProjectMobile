@@ -28,6 +28,7 @@ export default function Sobre() {
 
 
     return (
+    <>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
           <View style={styles.header}>
                <View style={{width:54, height: 54, backgroundColor: '#0003', alignItems: 'center', justifyContent: 'center', borderRadius: 50}}>
@@ -65,6 +66,7 @@ export default function Sobre() {
             <FlatList  data={tasks} keyExtractor={item => item.id}  renderItem={({item}) => <CardGit item={item}/> }/>
             </SafeAreaView>
       </ScrollView>
+    </>
      );
 }
 

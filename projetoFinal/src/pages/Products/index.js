@@ -12,10 +12,10 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 import { useState, useEffect, useContext } from "react";
-
+import LottieView from "lottie-react-native";
 import { ProdutoAPI } from "../../services/api";
 
-import { DataContext } from '../../Context/DataContext';
+import { DataContext } from "../../Context/DataContext";
 
 export default function Products() {
   const navigation = useNavigation();
@@ -26,7 +26,7 @@ export default function Products() {
   const [idPont, setIdPont] = useState(0);
 
   function infoId(item) {
-    navigation.navigate(`${url}/${item.id}`)
+    navigation.navigate(`${url}/${item.id}`);
     ctx.setInfo(item.id);
   }
 
@@ -41,7 +41,7 @@ export default function Products() {
     }
     return "/Products";
   };
-  
+
   const render = ({ item }) => {
     return (
       <View style={styles.produtos}>
@@ -50,24 +50,27 @@ export default function Products() {
           source={{ uri: item.fotoLink }}
         />
         <View style={styles.descricao}>
-          <Text style={styles.titulo}>{item.nome.substring(0,13)}</Text>
+          <Text style={styles.titulo}>{item.nome.substring(0, 13)}</Text>
           <Text style={styles.subTitulo}>{`R$ ${item.valor.toFixed(2)}`}</Text>
-          <TouchableOpacity style={styles.buttons} onPress={() => infoId(item)}>
-            <Text style={{color: '#003580'}}>Detalhes</Text>
-          </TouchableOpacity>        
+          <TouchableOpacity
+            style={styles.buttons}
+            onPress={() => infoId(item)}>
+            <Text style={{ color: "#003580" }}>Detalhes</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
   };
 
   const ProdutoFiltrar = () => {
-  
     const produtosFiltrados = produtos?.filter((produto) =>
       produto.nome.toUpperCase().includes(produtoFiltrado.toUpperCase())
     );
 
     return (
-      <FlatList numColumns={2} style={{width: '100%'}}
+      <FlatList
+        numColumns={2}
+        style={{ width: "100%" }}
         data={produtosFiltrados}
         keyExtractor={(item) => item.id}
         renderItem={render}
@@ -81,6 +84,12 @@ export default function Products() {
       <>
         <View>
           <Text>CARREGANDO PRODUTOS</Text>
+
+          <LottieView
+            source={require("../../assets/carregando2.json")}
+            autoPlay
+            loop
+            ></LottieView>
         </View>
       </>
     );
@@ -197,16 +206,17 @@ const styles = StyleSheet.create({
   textPage: {
     fontSize: 18,
     paddingBottom: 16,
-    color: '#FFFFFF',
+    color: "#FFFFFF",
   },
   produtosContainer: {
+    paddingBottom: 180,
   },
   produtos: {
-    alignItems: 'center',
+    alignItems: "center",
     padding: 30,
   },
   descricao: {
-    backgroundColor: '#003580',
+    backgroundColor: "#003580",
     width: 150,
     borderBottomRightRadius: 45,
   },
@@ -224,12 +234,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
   },
-  buttons:{
+  buttons: {
     marginVertical: 8,
     paddingVertical: 3,
     paddingHorizontal: 6,
-    alignSelf: 'center',
-    backgroundColor: '#FFF',
+    alignSelf: "center",
+    backgroundColor: "#FFF",
     borderBottomRightRadius: 10,
-  }
+  },
 });

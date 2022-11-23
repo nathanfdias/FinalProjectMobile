@@ -10,4 +10,5 @@
 
 -npm install axios
 
+-npm i --save lottie-react-native lottie-ios@3.4.0
 ...
