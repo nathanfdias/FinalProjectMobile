@@ -11,4 +11,11 @@
 -npm install axios
 
 -npm i --save lottie-react-native lottie-ios@3.4.0
+
+-npm install firebase
+{{{{{OU}}}}}
+-npx expo install expo-firebase-core
+
+email: amelhorturma4ever@gmail.com
+senha: 123456
 ...

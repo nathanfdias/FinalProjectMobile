@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,16 +6,31 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useState, useEffect } from "react";
 import * as Animatable from "react-native-animatable";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config/firebaseconfig";
 
 export default function SignIn() {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [errorLogin, setErrorLogin] = useState("");
+  const auth = getAuth();
+
+  const loginFirebase = () => {
+    signInWithEmailAndPassword(auth, email, senha)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        navigation.navigate("/", { idUser: user.uid });
+      })
+      .catch((error) => {
+        setErrorLogin(true);
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -56,21 +71,20 @@ export default function SignIn() {
         ) : (
           <View />
         )}
-        {/* DECOMENTAR ABAIXO PARA IMPEDIR DE ENTRAR SEM DIGITAR SENHA */}
-        {/* {email === "" || senha === "" ? (
+        {email === "" || senha === "" ? (
           <TouchableOpacity
             disabled={true}
             style={styles.button}
             onPress={() => navigation.navigate("/")}>
             <Text style={styles.buttonText}>Acessar</Text>
           </TouchableOpacity>
-        ) : ( */}
+        ) : (
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate("/")}>
+            onPress={loginFirebase}>
             <Text style={styles.buttonText}>Acessar</Text>
           </TouchableOpacity>
-        {/* )} */}
+        )}
 
         <TouchableOpacity style={styles.buttonRegister}>
           <Text style={styles.registerText}>

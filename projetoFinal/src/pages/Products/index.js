@@ -95,8 +95,7 @@ export default function Products() {
           <LottieView
             source={require("../../assets/carregando2.json")}
             autoPlay
-            loop
-            ></LottieView>
+            loop></LottieView>
         </View>
       </>
     );
@@ -115,7 +114,11 @@ export default function Products() {
             name=''
             id=''
           />
-          <Feather name='search' size={18} color='#FFFFFF'/>
+          <Feather
+            name='search'
+            size={18}
+            color='#FFFFFF'
+          />
         </View>
         <View
           style={{
@@ -126,7 +129,12 @@ export default function Products() {
             justifyContent: "center",
             borderRadius: 50,
           }}>
-          <Feather name='log-out' size={28} color='#FFF' onPress={() => navigation.navigate('/SignIn')}/>
+          <Feather
+            name='log-out'
+            size={28}
+            color='#FFF'
+            onPress={() => navigation.navigate("/SignIn")}
+          />
         </View>
       </View>
       <View style={styles.main}>
@@ -208,7 +216,7 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
   produtosContainer: {
-    paddingBottom: 180,
+    paddingBottom: 500,
   },
   produtos: {
     alignItems: "center",
