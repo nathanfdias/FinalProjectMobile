@@ -3,16 +3,16 @@ import { useRoute } from '@react-navigation/native';
 import { ProdutoAPI } from "../../services/api";
 import { useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, ImageBackground} from 'react-native';
-import { Feather } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons';
+
 
 import { useNavigation } from "@react-navigation/native";
 
 import { CartContext } from '../../Context/cart';
-import { DataContext } from '../../Context/DataContext';
 
 export default function ProdutoUnico() {
-    const ctx = useContext(DataContext);
-    const { produtos, carregando } = ProdutoAPI(`/${ctx.info}`);
+    const route = useRoute();
+    const { produtos, carregando } = ProdutoAPI(`/${route.params.id}`);
     const navigation = useNavigation();
 
     const { handleAddItemToCart } = useContext(CartContext);

@@ -11,12 +11,9 @@ import Cart from '../pages/Cart';
 
 import { useContext } from 'react';
 
-import { DataContext } from '../Context/DataContext';
-
 const Stack = createNativeStackNavigator();
 
 export default function Routes() {
-    const ctx = useContext(DataContext);
 
     return(
         <Stack.Navigator>
@@ -26,7 +23,7 @@ export default function Routes() {
             <Stack.Screen name="/Products" component={Products} options={{headerShown: false}}/>
             <Stack.Screen name="/Cadastro" component={Cadastro} options={{headerShown: false}}/>
             <Stack.Screen name="/Sobre" component={Sobre} options={{headerShown: false}}/>
-            <Stack.Screen name={`/Products/${ctx.info}`} component={ProdutoUnico} options={{headerShown: false}}/>
+            <Stack.Screen name="/Products/Detail" component={ProdutoUnico} options={{headerShown: false}}/>
             <Stack.Screen name="/Cart" component={Cart} options={{headerShown: false}}/>
         </Stack.Navigator>
     )

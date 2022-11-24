@@ -15,11 +15,6 @@ export default function Cart() {
         handleRemoveItemToCart,
         removalItem,
     } = useContext(CartContext);
-    
-    {productsCart?.map((produtos) => {
-    const subTotal = produtos.valor * produtos.quantidade;
-    totalPrice += subTotal;
-    })}
 
     console.log(productsCart);
     console.log(totalPrice);
@@ -45,31 +40,53 @@ export default function Cart() {
             </View>
         </View>
 
-        <View style={styles.boxProduto}>
-            <Image source={{uri: productsCart[0].fotoLink}} style={{width: 80, height: 80}}/>
-            <View style={{flexDirection: 'column'}}>
-                <Text >        
-                    {productsCart[0].nome}
-                </Text>
-                <Text>
-                    Valor: {productsCart[0].valor}
-                </Text>
+        {productsCart?.map((produtos) => {
+        const subTotal = produtos.valor * produtos.quantidade;
+        totalPrice += subTotal;
+
+            return(
+                <View style={styles.boxProduto}>
+                    <Image source={{uri: produtos.fotoLink}} style={{width: 80, height: 80}}/>
+                    <View style={{flexDirection: 'column'}}>
+                        <Text >        
+                            {produtos.nome}
+                        </Text>
+                        <Text>
+                            Valor Unit: R$ {produtos.valor}
+                        </Text>
+                        </View>
+                        <View style={{flexDirection:'row', width: 60, justifyContent: 'space-between'}}>
+                            <TouchableOpacity onPress={() => handleRemoveItemToCart(produtos.id)}>
+                                <Text style={styles.quantidade}>-</Text>
+                            </TouchableOpacity>
+                            <Text style={styles.quantidade}>{produtos.quantidade}</Text>
+                            <TouchableOpacity onPress={() => handleAddItemToCart(
+                                      produtos.id,
+                                      produtos.fotoLink,
+                                      produtos.nome,
+                                      produtos.valor
+                                    )}>
+                                <Text style={styles.quantidade}>+</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity onPress={() => removalItem(produtos.id)}>
+                            <Feather name='x-circle' size={20}/>
+                        </TouchableOpacity>
                 </View>
-                <View style={{flexDirection:'row', width: 60, justifyContent: 'space-between'}}>
-                    <TouchableOpacity><Text style={styles.quantidade}>-</Text></TouchableOpacity>
-                    <Text style={styles.quantidade}>{productsCart[0].quantidade}</Text>
-                    <TouchableOpacity><Text style={styles.quantidade}>+</Text></TouchableOpacity>
-                </View>
-                <Feather name='x-circle' size={20}/>
-        </View>
+            )
+        })}
+
         <View style={{width: '100%', alignItems: 'flex-end', paddingRight: 20, paddingTop: 10}}>
-            <Text style={{fontStyle: 'italic', color: '#003580'}}>Quantidade de Items: 1</Text>
+            <Text style={{fontStyle: 'italic', color: '#003580'}}>Quantidade de Items: {productsCart.length}</Text>
+        </View>
+        <View style={styles.valorTotal}>
+            <Text style={{fontSize:14}}>Valor Total: R$ {totalPrice}</Text>
         </View>
         <View style={styles.buttons}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={clearCart}>
                 <Text style={styles.button}>Limpar Carrinho</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => alert('Compra em Manutenção')}>
                 <Text style={styles.button}>Finalizar Compra</Text>
             </TouchableOpacity>
         </View>        
@@ -114,8 +131,13 @@ const styles = StyleSheet.create({
     buttons:{
         flexDirection:'row',
         width: '100%',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
         alignItems: 'center',
         height: 100,
+        paddingHorizontal: 50,
+    },
+    valorTotal: {
+        marginTop: 20,
+        paddingHorizontal: 50,
     }
 })

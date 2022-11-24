@@ -14,19 +14,15 @@ import { useState, useEffect, useContext } from "react";
 import LottieView from "lottie-react-native";
 import { ProdutoAPI } from "../../services/api";
 import { deleteProduto } from "../../services/api";
-import { DataContext } from "../../Context/DataContext";
 
 export default function Products() {
   const navigation = useNavigation();
   const [produtoFiltrado, setProdutoFiltrado] = useState("");
   const [url, setUrl] = useState("");
   const { produtos, carregando } = ProdutoAPI();
-  const ctx = useContext(DataContext);
-  const [idPont, setIdPont] = useState(0);
 
   function infoId(item) {
-    navigation.navigate(`${url}/${item.id}`);
-    ctx.setInfo(item.id);
+    navigation.navigate("/Products/Detail", { id: item.id });
   }
 
   function deleteId(item) {
