@@ -7,6 +7,7 @@ import Products from '../pages/Products';
 import Cadastro from '../pages/Cadastro';
 import Sobre from '../pages/Sobre';
 import ProdutoUnico from '../pages/ProdutoUnico';
+import Cart from '../pages/Cart';
 
 import { useContext } from 'react';
 
@@ -26,6 +27,7 @@ export default function Routes() {
             <Stack.Screen name="/Cadastro" component={Cadastro} options={{headerShown: false}}/>
             <Stack.Screen name="/Sobre" component={Sobre} options={{headerShown: false}}/>
             <Stack.Screen name={`/Products/${ctx.info}`} component={ProdutoUnico} options={{headerShown: false}}/>
+            <Stack.Screen name="/Cart" component={Cart} options={{headerShown: false}}/>
         </Stack.Navigator>
     )
 }

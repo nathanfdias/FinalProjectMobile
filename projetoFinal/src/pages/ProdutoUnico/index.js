@@ -7,12 +7,15 @@ import { Feather } from '@expo/vector-icons'
 
 import { useNavigation } from "@react-navigation/native";
 
+import { CartContext } from '../../Context/cart';
 import { DataContext } from '../../Context/DataContext';
 
 export default function ProdutoUnico() {
     const ctx = useContext(DataContext);
     const { produtos, carregando } = ProdutoAPI(`/${ctx.info}`);
     const navigation = useNavigation();
+
+    const { handleAddItemToCart } = useContext(CartContext);
 
     return (
       <ScrollView style={styles.container}>
@@ -44,7 +47,7 @@ export default function ProdutoUnico() {
                    <View style={styles.box}>
                        <Feather name='file' size={30} color='white' style={{paddingHorizontal:20}}/>
                        <View style={{justifyContent:'flex-start', width:110}}>
-                           <Text style={{fontSize: 18, color: '#FFF'}}>{produtos.nomeCategoria?.toLowerCase()}</Text>
+                           <Text style={{fontSize: 16, color: '#FFF'}}>{produtos.nomeCategoria?.toLowerCase()}</Text>
                            <Text style={{fontSize: 12, color: '#FFF5'}}>Categoria</Text>
                        </View>
                    </View>
@@ -60,8 +63,22 @@ export default function ProdutoUnico() {
                            <Image source={{uri: produtos?.fotoLink}} style={{width:156, height:230, marginVertical:6 ,borderRadius: 12, marginLeft: 10}}/>
                        </View>
                        <View style={{height: 230, alignItems: 'center', justifyContent: 'center'}}>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={() => {
+                            handleAddItemToCart(
+                                produtos.id,
+                                produtos.fotoLink,
+                                produtos.nome,
+                                produtos.valor
+                            )
+                            alert(`Produto: ${produtos.nome} adicionado ao carrinho!`)
+                        }}>
                                 <Text style={{color:'#003580'}}>Adicionar ao Carrinho</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.button, {marginTop: 20}]} onPress={() => navigation.navigate('/Products')}>
+                                <Text style={{color:'#003580'}}>Voltar a loja</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.button, {marginTop: 20}]} onPress={() => navigation.navigate('/Cart')}>
+                            <Feather name='shopping-cart' size={20} color='black' style={{paddingHorizontal:20}}/>
                         </TouchableOpacity>
                        </View>
                    </View>
@@ -130,7 +147,7 @@ export default function ProdutoUnico() {
            borderRadius: 14,
        },
        button:{
-           width: 160,
+           width: 150,
            height: 26,
            alignItems:'center',
            justifyContent: 'center',
@@ -139,9 +156,3 @@ export default function ProdutoUnico() {
            marginLeft: 18,
        }
    })
-
-{/* <View style={{flexDirection:'column'}}>
-<Text style={styles.textDescript}>{produtos.nome}</Text>
-<Text style={styles.textDescript}>{produtos.descricao}</Text>
-<Text style={styles.textDescript}>{`Valor: R$ ${produtos.valor}`}</Text>
-</View> */}
