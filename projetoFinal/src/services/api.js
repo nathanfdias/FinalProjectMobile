@@ -36,3 +36,12 @@ export const deleteProduto = async (id) => {
       console.log(e)
   }
 }
+
+export const getProdutos = async () => {
+  try {
+      const { data } = await api.get()
+      return data
+  } catch (e) {
+      console.log(e)
+  }
+}

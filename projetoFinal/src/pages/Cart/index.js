@@ -16,10 +16,6 @@ export default function Cart() {
         removalItem,
     } = useContext(CartContext);
 
-    console.log(productsCart);
-    console.log(totalPrice);
-    
-
  return (
     <View style={styles.container}>
         <View style={styles.header}>

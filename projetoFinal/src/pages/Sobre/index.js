@@ -13,12 +13,12 @@ import { useNavigation } from '@react-navigation/native';
 
 
 export default function Sobre() {
-    const [tasks, setTasks] = useState([]);
+    const [user, setUser] = useState([]);
     const navigation = useNavigation();
 
     const fetchData = async () => {
-        const taskList = await getUsers();
-        setTasks(taskList)
+        const userList = await getUsers();
+        setUser(userList)
     }
 
     useEffect(() => {
@@ -62,7 +62,7 @@ export default function Sobre() {
                </View>
            </View>
             <SafeAreaView>
-            <FlatList  data={tasks} keyExtractor={item => item.id}  renderItem={({item}) => <CardGit item={item}/> }/>
+            <FlatList  data={user} keyExtractor={item => item.id}  renderItem={({item}) => <CardGit item={item}/> }/>
             </SafeAreaView>
       </View>
     </>

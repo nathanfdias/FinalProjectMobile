@@ -12,22 +12,35 @@ import { useNavigation } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 import { useState, useEffect, useContext } from "react";
 import LottieView from "lottie-react-native";
-import { ProdutoAPI } from "../../services/api";
+ import { ProdutoAPI } from "../../services/api";
 import { deleteProduto } from "../../services/api";
+import { getProdutos } from "../../services/api";
 
 export default function Products() {
   const navigation = useNavigation();
   const [produtoFiltrado, setProdutoFiltrado] = useState("");
   const [url, setUrl] = useState("");
   const { produtos, carregando } = ProdutoAPI();
+  const [produto, setproduto] = useState([])
 
   function infoId(item) {
     navigation.navigate("/Products/Detail", { id: item.id });
   }
 
-  function deleteId(item) {
-    deleteProduto(`${item.id}`);
+  const deleteId = async (item) => {
+    const deletarProduto = await deleteProduto(`${item.id}`);
+    fetchData();
   }
+
+  const fetchData = async () => {
+    const produtoList = await getProdutos();
+    setproduto(produtoList)
+  }
+
+  useEffect(() => {
+      fetchData()
+  }, [])
+
 
   useEffect(() => {
     setUrl(urlLink(navigation.pathname));
@@ -49,7 +62,7 @@ export default function Products() {
         />
         <View style={styles.descricao}>
           <Text style={styles.titulo}>{item.nome.substring(0, 13)}</Text>
-          <Text style={styles.subTitulo}>{`R$ ${item.valor.toFixed(2)}`}</Text>
+          <Text style={styles.subTitulo}>{`R$ ${item.valor}`}</Text>
           <TouchableOpacity
             style={styles.buttons}
             onPress={() => infoId(item)}>
@@ -66,7 +79,7 @@ export default function Products() {
   };
 
   const ProdutoFiltrar = () => {
-    const produtosFiltrados = produtos?.filter((produto) =>
+    const produtosFiltrados = produto?.filter((produto) =>
       produto.nome.toUpperCase().includes(produtoFiltrado.toUpperCase())
     );
 
