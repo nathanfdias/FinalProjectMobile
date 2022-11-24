@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const api = axios.create({
-  baseURL: "https://ecommerce-api-react-serratec.herokuapp.com/produto",
+  baseURL: "https://kifel.herokuapp.com/produto",
 });
 
 export function ProdutoAPI(url) {

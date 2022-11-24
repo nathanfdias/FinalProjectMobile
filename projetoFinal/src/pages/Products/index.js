@@ -116,7 +116,7 @@ export default function Products() {
         <View style={styles.inputArea}>
           <TextInput
             style={styles.input}
-            placeholder='Search'
+            placeholder='Buscar'
             placeholderTextColor='#FFFFFF'
             value={produtoFiltrado}
             onChangeText={setProdutoFiltrado}
@@ -139,7 +139,7 @@ export default function Products() {
             borderRadius: 50,
           }}>
           <Feather
-            name='log-out'
+            name='file-plus'
             size={28}
             color='#FFF'
             onPress={() => navigation.navigate("/SignIn")}
