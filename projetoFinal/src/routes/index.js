@@ -21,7 +21,7 @@ export default function Routes() {
             <Stack.Screen name="/SignIn" component={SignIn} options={{headerShown: false}}/>
             <Stack.Screen name="/" component={Home} options={{headerShown: false}}/>
             <Stack.Screen name="/Products" component={Products} options={{headerShown: false}}/>
-            {/* <Stack.Screen name="/Products/Detail" component={ProdutoUnico} options={{headerShown: false}}/> */}
+            <Stack.Screen name="/Products/Detail" component={ProdutoUnico} options={{headerShown: false}}/>
             {/* <Stack.Screen name="/Products/Create" component={ProdutoCadastro} options={{headerShown: false}}/> */}
             <Stack.Screen name="/Cadastro" component={Cadastro} options={{headerShown: false}}/>
             <Stack.Screen name="/Sobre" component={Sobre} options={{headerShown: false}}/>
