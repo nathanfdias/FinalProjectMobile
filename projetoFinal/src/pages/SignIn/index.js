@@ -48,7 +48,7 @@ export default function SignIn() {
         <Text style={styles.title}>Email</Text>
         <TextInput
           placeholder='Digite um email'
-          type='text'
+          keyboardType='email-address'
           style={styles.input}
           onChangeText={(text) => setEmail(text)}
           value={email}

@@ -66,12 +66,12 @@ export default function ProdutoCadastro() {
 
                 <Text style={{ fontSize: 18, color: '#FFF', alignSelf: 'flex-start', paddingHorizontal: 26 }}>Valor:</Text>
                 <View style={styles.inputArea}>
-                    <TextInput style={styles.input} placeholder='' placeholderTextColor='#FFFFFF' value={produtos} onChangeText={setValor} name='' id='' />
+                    <TextInput style={styles.input} keyboardType='numeric' placeholder='' placeholderTextColor='#FFFFFF' value={produtos} onChangeText={setValor} name='' id='' />
                 </View>
                 
                 <Text style={{ fontSize: 18, color: '#FFF', alignSelf: 'flex-start', paddingHorizontal: 26 }}>Quantidade:</Text>
                 <View style={styles.inputArea}>
-                    <TextInput style={styles.input} placeholder='' placeholderTextColor='#FFFFFF' value={produtos} onChangeText={setQuantidade} name='' id='' />
+                    <TextInput style={styles.input} keyboardType='numeric' placeholder='' placeholderTextColor='#FFFFFF' value={produtos} onChangeText={setQuantidade} name='' id='' />
                 </View>
 
                 <Text style={{ fontSize: 18, color: '#FFF', alignSelf: 'flex-start', paddingHorizontal: 26 }}>Categoria:</Text>
@@ -91,7 +91,7 @@ export default function ProdutoCadastro() {
 
                 <Text style={{ fontSize: 18, color: '#FFF', alignSelf: 'flex-start', paddingHorizontal: 26 }}>Imagem:</Text>
                 <View style={styles.inputArea}>
-                    <TextInput style={styles.input} placeholder='' placeholderTextColor='#FFFFFF' value={produtos} onChangeText={setImagem} name='' id='' />
+                    <TextInput style={styles.input} placeholder='' keyboardType='url' placeholderTextColor='#FFFFFF' value={produtos} onChangeText={setImagem} name='' id='' />
                 </View>
 
                 <TouchableOpacity style={[styles.button, { marginTop: 20 }]} onPress={() => cadastrar()}>
