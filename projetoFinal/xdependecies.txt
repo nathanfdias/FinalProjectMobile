@@ -19,3 +19,5 @@
 email: amelhorturma4ever@gmail.com
 senha: 123456
 ...
+
+-npm install react-native-dropdown-picker
