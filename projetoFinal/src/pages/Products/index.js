@@ -142,7 +142,7 @@ export default function Products() {
             name='file-plus'
             size={28}
             color='#FFF'
-            onPress={() => navigation.navigate("/SignIn")}
+            onPress={() => navigation.navigate("/Products/Create")}
           />
         </View>
       </View>

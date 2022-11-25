@@ -45,3 +45,14 @@ export const getProdutos = async () => {
       console.log(e)
   }
 }
+
+export const cadastrarProduto = async (novoProduto) => {
+  try {
+      const produto = await api.post("/", novoProduto)
+      console.log(produto)
+      return produto
+
+  } catch (e) {
+      console.log(e)
+  }
+}
