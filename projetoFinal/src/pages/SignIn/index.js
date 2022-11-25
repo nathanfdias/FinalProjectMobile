@@ -11,7 +11,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebaseconfig";
-import {Ionicons} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function SignIn() {
   const navigation = useNavigation();
@@ -20,7 +20,6 @@ export default function SignIn() {
   const [errorLogin, setErrorLogin] = useState("");
   const auth = getAuth();
   const [hidePass, setHidePass] = useState(true);
- 
 
   const loginFirebase = () => {
     signInWithEmailAndPassword(auth, email, senha)
@@ -54,26 +53,36 @@ export default function SignIn() {
           onChangeText={(text) => setEmail(text)}
           value={email}
         />
-      
+
         <Text style={styles.title}>Senha</Text>
         <Animatable.View>
           <View style={styles.inputArea}>
-        <TextInput
-          placeholder='Digite sua senha'
-          secureTextEntry={hidePass}
-          style={styles.input2}
-          onChangeText={(text) => setSenha(text)}
-          value={senha}
-         />
-         <TouchableOpacity style={styles.icon} onPress={ () => setHidePass(!hidePass) }>
-          {hidePass ?
-          <Ionicons name='eye' color="black" size={25}/>
-          :
-          <Ionicons name='eye-off' color="black" size={25}/>
-        }
-        </TouchableOpacity>
-        </View>
-      </Animatable.View>
+            <TextInput
+              placeholder='Digite sua senha'
+              secureTextEntry={hidePass}
+              style={styles.input2}
+              onChangeText={(text) => setSenha(text)}
+              value={senha}
+            />
+            <TouchableOpacity
+              style={styles.icon}
+              onPress={() => setHidePass(!hidePass)}>
+              {hidePass ? (
+                <Ionicons
+                  name='eye'
+                  color='black'
+                  size={25}
+                />
+              ) : (
+                <Ionicons
+                  name='eye-off'
+                  color='black'
+                  size={25}
+                />
+              )}
+            </TouchableOpacity>
+          </View>
+        </Animatable.View>
 
         {errorLogin === true ? (
           <View style={styles.contentAlert}>
@@ -142,34 +151,32 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    marginTop: 28,   
+    marginTop: 28,
   },
   input: {
     borderBottomWidth: 1,
     height: 40,
     marginBottom: 12,
-    fontSize: 16,    
+    fontSize: 16,
   },
   input2: {
-    height: 50,
+    height: 60,
     marginBottom: 12,
     fontSize: 16,
-    flexDirection: 'row',
-    width: '85%',
-           
+    flexDirection: "row",
+    width: "85%",
   },
   inputArea: {
-    flexDirection: 'row',
-    width: '100%',
+    flexDirection: "row",
+    width: "100%",
     height: 50,
     borderBottomWidth: 1,
-      },
-  icon:{
-    width: '15%',
+  },
+  icon: {
+    width: "15%",
     height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-        
+    justifyContent: "center",
+    alignItems: "center",
   },
   button: {
     backgroundColor: "#003580",
@@ -205,4 +212,4 @@ const styles = StyleSheet.create({
   linkSubscribe: {
     color: "#1877f2",
   },
- });
+});

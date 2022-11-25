@@ -13,6 +13,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebaseconfig";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function Cadastro() {
   const navigation = useNavigation();
@@ -21,6 +22,8 @@ export default function Cadastro() {
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [errorRegister, setErrorRegister] = useState("");
   const auth = getAuth();
+  const [hidePass, setHidePass] = useState(true);
+  const [newhidePass, setNewHidePass] = useState(true);
 
   const registerFirebase = () => {
     createUserWithEmailAndPassword(auth, email, senha)
@@ -56,21 +59,59 @@ export default function Cadastro() {
           value={email}
         />
         <Text style={styles.title}>Senha</Text>
-        <TextInput
-          placeholder='Sua senha'
-          secureTextEntry={true}
-          style={styles.input}
-          onChangeText={(text) => setSenha(text)}
-          value={senha}
-        />
+        <View style={styles.inputArea}>
+          <TextInput
+            placeholder='Sua senha'
+            secureTextEntry={hidePass}
+            style={styles.input2}
+            onChangeText={(text) => setSenha(text)}
+            value={senha}
+          />
+          <TouchableOpacity
+            style={styles.icon}
+            onPress={() => setHidePass(!hidePass)}>
+            {hidePass ? (
+              <Ionicons
+                name='eye'
+                color='black'
+                size={25}
+              />
+            ) : (
+              <Ionicons
+                name='eye-off'
+                color='black'
+                size={25}
+              />
+            )}
+          </TouchableOpacity>
+        </View>
         <Text style={styles.title}>Confirme sua senha</Text>
-        <TextInput
-          placeholder='Sua senha'
-          secureTextEntry={true}
-          style={styles.input}
-          onChangeText={(text) => setConfirmarSenha(text)}
-          value={confirmarSenha}
-        />
+        <View style={styles.inputArea}>
+          <TextInput
+            placeholder='Sua senha'
+            secureTextEntry={newhidePass}
+            style={styles.input2}
+            onChangeText={(text) => setConfirmarSenha(text)}
+            value={confirmarSenha}
+          />
+          <TouchableOpacity
+            style={styles.icon}
+            onPress={() => setNewHidePass(!newhidePass)}>
+            {newhidePass ? (
+              <Ionicons
+                name='eye'
+                color='black'
+                size={25}
+              />
+            ) : (
+              <Ionicons
+                name='eye-off'
+                color='black'
+                size={25}
+              />
+            )}
+          </TouchableOpacity>
+        </View>
         {errorRegister === true ? (
           <View style={styles.contentAlert}>
             <MaterialCommunityIcons
@@ -142,6 +183,25 @@ const styles = StyleSheet.create({
     height: 40,
     marginBottom: 12,
     fontSize: 16,
+  },
+  input2: {
+    height: 60,
+    marginBottom: 12,
+    fontSize: 16,
+    flexDirection: "row",
+    width: "85%",
+  },
+  inputArea: {
+    flexDirection: "row",
+    width: "100%",
+    height: 50,
+    borderBottomWidth: 1,
+  },
+  icon: {
+    width: "15%",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
   button: {
     backgroundColor: "#003580",
