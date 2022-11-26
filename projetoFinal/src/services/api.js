@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: "https://kifel.herokuapp.com/produto",
 });
 
@@ -49,10 +49,18 @@ export const getProdutos = async () => {
 export const cadastrarProduto = async (novoProduto) => {
   try {
       const produto = await api.post("/", novoProduto)
-      console.log(produto)
       return produto
-
   } catch (e) {
       console.log(e)
   }
 }
+
+export const atualizarProduto = async (produto) => {
+  try {
+      const atualizarProduto = await api.put(`/${produto.id}`, produto)
+      return atualizarProduto
+  } catch (e) {
+      console.log(e)
+  }
+}
+

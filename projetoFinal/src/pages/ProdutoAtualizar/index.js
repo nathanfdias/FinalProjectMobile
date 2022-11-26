@@ -1,23 +1,23 @@
 import React from 'react';
 import { useRoute } from '@react-navigation/native';
-import { cadastrarProduto } from "../../services/api";
+import { atualizarProduto } from "../../services/api";
+import { api } from "../../services/api"
 import { useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, ImageBackground, TextInput } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import DropDownPicker from 'react-native-dropdown-picker'
 
-export default function ProdutoCadastro() {
-    const route = useRoute();
+export default function ProdutoAtualizar({ route }) {
+    const { item } = route.params
     const navigation = useNavigation();
-    const [produtos, setProdutos] = useState()
-    const [nome, setNome] = useState("")
-    const [valor, setValor] = useState(0)
-    const [descricao, setDescricao] = useState("")
-    const [imagem, setImagem] = useState("")
-    const [quantidade, setQuantidade] = useState(0)
+    const [nome, setNome] = useState(item.nome)
+    const [valor, setValor] = useState(item.valor)
+    const [descricao, setDescricao] = useState(item.descricao)
+    const [imagem, setImagem] = useState(item.fotoLink)
+    const [quantidade, setQuantidade] = useState(item.qtdEstoque)
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState('INFORMATICA');
+    const [value, setValue] = useState(null);
     const [nomeCategoria, setNomeCategoria] = useState([
         { label: 'INFORMATICA', value: 'INFORMATICA' },
         { label: 'ESCRITORIO', value: 'ESCRITORIO' },
@@ -26,25 +26,23 @@ export default function ProdutoCadastro() {
 
 
     const cadastrar = async (e) => {
-        if (nome == '' || valor == '' || valor == 0 || descricao == '' || imagem == '' || quantidade == '' || quantidade == 0) {
+        if (nome == '' || valor == '' || descricao == '' || imagem == '') {
             alert('Campos obrigatórios em branco')
-            return
         } else {
             const produto = {
                 nome: nome,
-                valor: valor,
+                valor: 1,
                 descricao: descricao,
-                nomeCategoria: value,
+                nomeCategoria: "INFORMATICA",
                 fotoLink: imagem,
-                qtdEstoque: quantidade,
+                qtdEstoque: 1,
                 idCategoria: 1,
                 idFuncionario: 1,
                 nomeFuncionario: "admin",
                 dataFabricacao: "2019-10-01T00:00:00Z"
-
             }
-            await cadastrarProduto(produto);
-            alert("Cadastrado com sucesso")
+            await api.put(`/${item.id}`, produto)
+            alert("Atualizado com sucesso")
             navigation.goBack()
         }
     }
@@ -70,18 +68,18 @@ export default function ProdutoCadastro() {
 
                 <Text style={{ fontSize: 18, color: '#FFF', alignSelf: 'flex-start', paddingHorizontal: 26 }}>Valor:</Text>
                 <View style={styles.inputArea}>
-                    <TextInput style={styles.input} keyboardType='numeric' placeholder='' placeholderTextColor='#FFFFFF' value={produtos} onChangeText={setValor} name='' id='' />
+                    <TextInput style={styles.input} keyboardType='numeric' placeholder='' placeholderTextColor='#FFFFFF' value={valor.toString()} onChangeText={setValor} name='' id='' />
                 </View>
 
                 <Text style={{ fontSize: 18, color: '#FFF', alignSelf: 'flex-start', paddingHorizontal: 26 }}>Quantidade:</Text>
                 <View style={styles.inputArea}>
-                    <TextInput style={styles.input} keyboardType='numeric' placeholder='' placeholderTextColor='#FFFFFF' value={produtos} onChangeText={setQuantidade} name='' id='' />
+                    <TextInput style={styles.input} keyboardType='numeric' placeholder='' placeholderTextColor='#FFFFFF' value={quantidade.toString()} onChangeText={setQuantidade} name='' id='' />
                 </View>
 
                 <Text style={{ fontSize: 18, color: '#FFF', alignSelf: 'flex-start', paddingHorizontal: 26 }}>Categoria:</Text>
                 <DropDownPicker style={styles.drop}
                     open={open}
-                    value={value}
+                    value={item.nomeCategoria}
                     items={nomeCategoria}
                     setOpen={setOpen}
                     setValue={setValue}
@@ -90,16 +88,16 @@ export default function ProdutoCadastro() {
 
                 <Text style={{ fontSize: 18, color: '#FFF', alignSelf: 'flex-start', paddingHorizontal: 26 }}>Descrição:</Text>
                 <View style={styles.inputArea}>
-                    <TextInput style={styles.input} placeholder='' placeholderTextColor='#FFFFFF' value={produtos} onChangeText={setDescricao} name='' id='' />
+                    <TextInput style={styles.input} placeholder='' placeholderTextColor='#FFFFFF' value={descricao} onChangeText={setDescricao} name='' id='' />
                 </View>
 
                 <Text style={{ fontSize: 18, color: '#FFF', alignSelf: 'flex-start', paddingHorizontal: 26 }}>Imagem:</Text>
                 <View style={styles.inputArea}>
-                    <TextInput style={styles.input} placeholder='' keyboardType='url' placeholderTextColor='#FFFFFF' value={produtos} onChangeText={setImagem} name='' id='' />
+                    <TextInput style={styles.input} placeholder='' keyboardType='url' placeholderTextColor='#FFFFFF' value={imagem} onChangeText={setImagem} name='' id='' />
                 </View>
 
                 <TouchableOpacity style={[styles.button, { marginTop: 20 }]} onPress={() => cadastrar()}>
-                    <Text style={{ color: '#003580' }}>Cadastrar</Text>
+                    <Text style={{ color: '#003580' }}>Atualizar</Text>
                 </TouchableOpacity>
             </View>
 

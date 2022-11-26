@@ -11,10 +11,10 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 import { useState, useEffect, useContext } from "react";
-import LottieView from "lottie-react-native";
- import { ProdutoAPI } from "../../services/api";
+import { ProdutoAPI } from "../../services/api";
 import { deleteProduto } from "../../services/api";
 import { getProdutos } from "../../services/api";
+import Loading from "../../components/Loading/Loading";
 
 export default function Products() {
   const navigation = useNavigation();
@@ -32,13 +32,17 @@ export default function Products() {
     fetchData();
   }
 
+  const editarProduto = async (item) => {
+    navigation.navigate("/Products/Update", { item: item });
+  }
+
   const fetchData = async () => {
     const produtoList = await getProdutos();
     setproduto(produtoList)
   }
 
   useEffect(() => {
-      fetchData()
+    navigation.addListener('focus', () => fetchData())
   }, [])
 
 
@@ -67,6 +71,11 @@ export default function Products() {
             style={styles.buttons}
             onPress={() => infoId(item)}>
             <Text style={{ color: "#003580" }}>Detalhes</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttons}
+            onPress={() => editarProduto(item)}>
+            <Text style={{ color: "#003580" }}>Editar</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.buttons}
@@ -99,12 +108,7 @@ export default function Products() {
     return (
       <>
         <View>
-          <Text>CARREGANDO PRODUTOS</Text>
-
-          <LottieView
-            source={require("../../assets/carregando2.json")}
-            autoPlay
-            loop></LottieView>
+          <Loading />
         </View>
       </>
     );
