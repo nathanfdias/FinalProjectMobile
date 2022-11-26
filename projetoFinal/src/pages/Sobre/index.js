@@ -12,7 +12,6 @@ import { getUsers } from '../../services/apiGitClient';
 import { useNavigation } from '@react-navigation/native';
 import Loading from '../../components/Loading/Loading';
 
-
 export default function Sobre() {
     const [user, setUser] = useState([]);
     const navigation = useNavigation();

@@ -21,3 +21,4 @@ senha: 123456
 ...
 
 -npm install react-native-dropdown-picker
+-npm install --save @react-native-community/netinfo
