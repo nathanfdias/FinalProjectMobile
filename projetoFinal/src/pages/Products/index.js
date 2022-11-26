@@ -15,13 +15,17 @@ import { ProdutoAPI } from "../../services/api";
 import { deleteProduto } from "../../services/api";
 import { getProdutos } from "../../services/api";
 import Loading from "../../components/Loading/Loading";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { emailAdministrador } from "../../config/firebaseconfig";
 
 export default function Products() {
   const navigation = useNavigation();
   const [produtoFiltrado, setProdutoFiltrado] = useState("");
   const [url, setUrl] = useState("");
   const { produtos, carregando } = ProdutoAPI();
-  const [produto, setproduto] = useState([])
+  const [produto, setproduto] = useState([]);
+  const auth = getAuth();
+  const [validacao, setValidacao] = useState("");
 
   function infoId(item) {
     navigation.navigate("/Products/Detail", { id: item.id });
@@ -30,25 +34,35 @@ export default function Products() {
   const deleteId = async (item) => {
     const deletarProduto = await deleteProduto(`${item.id}`);
     fetchData();
-  }
+  };
 
   const editarProduto = async (item) => {
     navigation.navigate("/Products/Update", { item: item });
-  }
+  };
 
   const fetchData = async () => {
     const produtoList = await getProdutos();
-    setproduto(produtoList)
-  }
+    setproduto(produtoList);
+  };
 
   useEffect(() => {
-    navigation.addListener('focus', () => fetchData())
-  }, [])
+    navigation.addListener("focus", () => fetchData());
+  }, []);
 
+  const verificacao = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user.email === emailAdministrador) {
+        setValidacao(true);
+      } else {
+        setValidacao(false);
+      }
+    });
+  };
 
   useEffect(() => {
     setUrl(urlLink(navigation.pathname));
-  }, [navigation]);
+    verificacao();
+  }, [navigation, validacao]);
 
   const urlLink = (url) => {
     if (!url == "/Products") {
@@ -72,16 +86,24 @@ export default function Products() {
             onPress={() => infoId(item)}>
             <Text style={{ color: "#003580" }}>Detalhes</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.buttons}
-            onPress={() => editarProduto(item)}>
-            <Text style={{ color: "#003580" }}>Editar</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.buttons}
-            onPress={() => deleteId(item)}>
-            <Text style={{ color: "#003580" }}>Excluir</Text>
-          </TouchableOpacity>
+          {validacao === true ? (
+            <TouchableOpacity
+              style={styles.buttons}
+              onPress={() => editarProduto(item)}>
+              <Text style={{ color: "#003580" }}>Editar</Text>
+            </TouchableOpacity>
+          ) : (
+            <View />
+          )}
+          {validacao === true ? (
+            <TouchableOpacity
+              style={styles.buttons}
+              onPress={() => deleteId(item)}>
+              <Text style={{ color: "#003580" }}>Excluir</Text>
+            </TouchableOpacity>
+          ) : (
+            <View />
+          )}
         </View>
       </View>
     );
@@ -133,22 +155,26 @@ export default function Products() {
             color='#FFFFFF'
           />
         </View>
-        <View
-          style={{
-            width: 54,
-            height: 54,
-            backgroundColor: "#0003",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 50,
-          }}>
-          <Feather
-            name='file-plus'
-            size={28}
-            color='#FFF'
-            onPress={() => navigation.navigate("/Products/Create")}
-          />
-        </View>
+        {validacao === true ? (
+          <View
+            style={{
+              width: 54,
+              height: 54,
+              backgroundColor: "#0003",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 50,
+            }}>
+            <Feather
+              name='file-plus'
+              size={28}
+              color='#FFF'
+              onPress={() => navigation.navigate("/Products/Create")}
+            />
+          </View>
+        ) : (
+          <View />
+        )}
       </View>
       <View style={styles.main}>
         <Text style={{ fontSize: 50, color: "#FFF" }}>Mostruário</Text>

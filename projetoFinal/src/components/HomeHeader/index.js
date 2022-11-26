@@ -34,6 +34,9 @@ export default function HomeHeader() {
           name='shopping-cart'
           size={28}
           color='white'
+          onPress={() => {
+            navigation.navigate("/Cart");
+          }}
         />
       </View>
       <View
