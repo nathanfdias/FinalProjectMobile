@@ -63,6 +63,7 @@ export default function ProdutoCadastro() {
                 </ImageBackground>
             </View>
             <View style={styles.main}>
+                <Text style={{ fontSize: 24, color: '#FFF', alignSelf: 'center', paddingHorizontal: 26 }}>Cadastrar Produto</Text>
                 <Text style={{ fontSize: 18, color: '#FFF', alignSelf: 'flex-start', paddingHorizontal: 26 }}>Nome:</Text>
                 <View style={styles.inputArea}>
                     <TextInput style={styles.input} placeholder='' placeholderTextColor='#FFFFFF' value={nome} onChangeText={setNome} name='' id='' />
@@ -126,7 +127,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 26,
     },
     main: {
-        marginTop: -40,
         borderTopEndRadius: 35,
         borderTopStartRadius: 35,
         backgroundColor: '#003580',
